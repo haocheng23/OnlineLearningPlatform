@@ -164,6 +164,9 @@ public class ViewRoute {
 	public String parseAccessBytime(){
 		return "parseAccessBytime";
 	}
-	
-	
+
+	@RequestMapping("/showLearnAffect")
+	public String learnAffect() {
+		return "showLearnAffect";
+	}
 }

@@ -65,7 +65,7 @@ public class TeacherInfoController {
 		map.put("start", start);
 		map.put("pagesize", lim);
 		List<Teacher> allTeacher = teacherService.findAllTeacher(map);
-		List<Teacher>teacher =  new ArrayList<>();
+		List<Teacher> teacher = new ArrayList<>();
 		for(int i=0;i<allTeacher.size();i++) {
 			String teachno = allTeacher.get(i).getTeachno();
 			String name = allTeacher.get(i).getName();

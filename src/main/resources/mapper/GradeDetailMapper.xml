@@ -16,6 +16,7 @@
     <result column="exam_grade" jdbcType="VARCHAR" property="examGrade" />
     <result column="access_grade" jdbcType="VARCHAR" property="accessGrade" />
     <result column="total_grade" jdbcType="VARCHAR" property="totalGrade" />
+    <result column="percent" jdbcType="VARCHAR" property="percent" />
     <result column="level" jdbcType="VARCHAR" property="level" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -49,7 +50,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, course_id, course_name, stu_name, stu_no, school_name, depart_id, depart_name, 
-    specialty, classes, work_grade, exam_grade, access_grade, total_grade, level
+    specialty, classes, work_grade, exam_grade, access_grade, total_grade, percent, level
   </sql>
   <select id="selectByExample" parameterType="com.nwafu.byj.entity.GradeDetailExample" resultMap="BaseResultMap">
     select
@@ -76,13 +77,13 @@
       stu_name, stu_no, school_name, 
       depart_id, depart_name, specialty, 
       classes, work_grade, exam_grade, 
-      access_grade, total_grade, level
+      access_grade, total_grade, percent, level
       )
     values (#{id,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR}, 
       #{stuName,jdbcType=VARCHAR}, #{stuNo,jdbcType=VARCHAR}, #{schoolName,jdbcType=VARCHAR}, 
       #{departId,jdbcType=VARCHAR}, #{departName,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
       #{classes,jdbcType=VARCHAR}, #{workGrade,jdbcType=VARCHAR}, #{examGrade,jdbcType=VARCHAR}, 
-      #{accessGrade,jdbcType=VARCHAR}, #{totalGrade,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}
+      #{accessGrade,jdbcType=VARCHAR}, #{totalGrade,jdbcType=VARCHAR}, #{percent,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.nwafu.byj.entity.GradeDetail">
@@ -129,6 +130,9 @@
       </if>
       <if test="totalGrade != null">
         total_grade,
+      </if>
+      <if test="percent != null">
+        percent,
       </if>
       <if test="level != null">
         level,
@@ -177,6 +181,9 @@
       <if test="totalGrade != null">
         #{totalGrade,jdbcType=VARCHAR},
       </if>
+      <if test="percent != null">
+        #{percent,jdbcType=VARCHAR},
+      </if>
       <if test="level != null">
         #{level,jdbcType=VARCHAR},
       </if>
@@ -187,5 +194,11 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
+  </select>
+
+  <select id="getResult" resultMap="BaseResultMap">
+    SELECT
+        stu_no,stu_name,total_grade,percent
+    FROM grade_detail
   </select>
 </mapper>

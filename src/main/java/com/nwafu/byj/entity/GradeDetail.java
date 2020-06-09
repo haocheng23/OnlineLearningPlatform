@@ -29,7 +29,11 @@ public class GradeDetail {
 
     private String totalGrade;
 
+    private String percent;
+
     private String level;
+
+    private String affect;
 
     public String getId() {
         return id;
@@ -143,11 +147,27 @@ public class GradeDetail {
         this.totalGrade = totalGrade == null ? null : totalGrade.trim();
     }
 
+    public String getPercent() {
+        return percent;
+    }
+
+    public void setPercent(String percent) {
+        this.percent = percent;
+    }
+
     public String getLevel() {
         return level;
     }
 
     public void setLevel(String level) {
         this.level = level == null ? null : level.trim();
+    }
+
+    public String getAffect() {
+        return affect;
+    }
+
+    public void setAffect(String affect) {
+        this.affect = affect;
     }
 }

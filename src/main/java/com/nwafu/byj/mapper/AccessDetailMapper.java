@@ -2,6 +2,7 @@ package com.nwafu.byj.mapper;
 
 import com.nwafu.byj.entity.AccessDetail;
 import com.nwafu.byj.entity.AccessDetailExample;
+import com.nwafu.byj.entity.GradeDetail;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

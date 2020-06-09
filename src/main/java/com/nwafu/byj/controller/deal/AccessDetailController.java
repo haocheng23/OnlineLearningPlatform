@@ -29,4 +29,10 @@ public class AccessDetailController {
     private JSONObject getTime(@RequestParam("dateStr") String dateStr){
         return accessDetailService.getTime(dateStr);
     }
+
+    @RequestMapping("/learnAffect/getResult")
+    @ResponseBody
+    private Object getResult(){
+        return accessDetailService.getResult();
+    }
 }

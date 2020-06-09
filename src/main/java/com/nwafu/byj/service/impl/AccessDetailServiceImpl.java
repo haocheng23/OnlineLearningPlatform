@@ -1,12 +1,17 @@
 package com.nwafu.byj.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.nwafu.byj.entity.AccessDetail;
+import com.nwafu.byj.entity.GradeDetail;
 import com.nwafu.byj.mapper.AccessDetailMapper;
+import com.nwafu.byj.mapper.GradeDetailMapper;
 import com.nwafu.byj.service.AccessDetailService;
+import com.nwafu.byj.tools.Layui;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +22,8 @@ public class AccessDetailServiceImpl implements AccessDetailService {
 
     @Autowired
     private AccessDetailMapper mapper;
+    @Autowired
+    private GradeDetailMapper gradeDetailMapper;
 
     @Override
     public JSONObject getDaily(String year, String month) {
@@ -72,5 +79,29 @@ public class AccessDetailServiceImpl implements AccessDetailService {
         jsonObject.put("yAxis", yAxis);
 
         return jsonObject;
+    }
+
+
+    @Override
+    public Object getResult() {
+
+        List<GradeDetail> list = gradeDetailMapper.getResult();
+        for (GradeDetail item : list) {
+            BigDecimal totalGrade = new BigDecimal(item.getTotalGrade());
+            BigDecimal percent = new BigDecimal(item.getPercent().split("%")[0]);
+            int compare1 = totalGrade.compareTo(new BigDecimal(80));
+            int compare11 = totalGrade.compareTo(new BigDecimal(60));
+            int compare2 = percent.compareTo(new BigDecimal(30));
+            int compare22 = percent.compareTo(new BigDecimal(20));
+            if (compare1 > 1 && compare2 > 1){
+                item.setAffect("优");
+            } else if (compare11 > 1 && compare22 > 1){
+                item.setAffect("良");
+            } else {
+                item.setAffect("差");
+            }
+        }
+        Layui data = Layui.data(list.size(), list);
+        return JSON.toJSON(data);
     }
 }

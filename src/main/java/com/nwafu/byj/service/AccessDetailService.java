@@ -6,4 +6,7 @@ public interface AccessDetailService {
     JSONObject getDaily(String year, String month);
 
     JSONObject getTime(String dateStr);
+
+    Object getResult();
+
 }
