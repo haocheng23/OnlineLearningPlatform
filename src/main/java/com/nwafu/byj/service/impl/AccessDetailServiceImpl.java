@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AccessDetailServiceImpl implements AccessDetailService {
@@ -83,9 +84,8 @@ public class AccessDetailServiceImpl implements AccessDetailService {
 
 
     @Override
-    public Object getResult() {
-
-        List<GradeDetail> list = gradeDetailMapper.getResult();
+    public Object getResult(Map<String, Object> map) {
+        List<GradeDetail> list = gradeDetailMapper.getResult(map);
         for (GradeDetail item : list) {
             BigDecimal totalGrade = new BigDecimal(item.getTotalGrade());
             BigDecimal percent = new BigDecimal(item.getPercent().split("%")[0]);
@@ -93,9 +93,9 @@ public class AccessDetailServiceImpl implements AccessDetailService {
             int compare11 = totalGrade.compareTo(new BigDecimal(60));
             int compare2 = percent.compareTo(new BigDecimal(30));
             int compare22 = percent.compareTo(new BigDecimal(20));
-            if (compare1 > 1 && compare2 > 1){
+            if (compare1 > 0 && compare2 > 0){
                 item.setAffect("优");
-            } else if (compare11 > 1 && compare22 > 1){
+            } else if (compare11 > 0 && compare22 > 0){
                 item.setAffect("良");
             } else {
                 item.setAffect("差");

@@ -198,7 +198,11 @@
 
   <select id="getResult" resultMap="BaseResultMap">
     SELECT
-        stu_no,stu_name,total_grade,percent
+        stu_no,stu_name,course_name, total_grade,percent
     FROM grade_detail
+    <if test="stuName != null and stuName != ''">
+      where stu_name = #{stuName}
+    </if>
+    limit #{start},#{pagesize}
   </select>
 </mapper>

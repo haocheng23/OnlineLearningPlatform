@@ -39,14 +39,11 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    <div class="layui-row">
-        <div class="demoTable" style="margin-bottom: 20px">
-            搜索姓名：
-            <div class="layui-inline">
-                <input class="layui-input" name="id" id="demoReload" autocomplete="off">
-            </div>
-            <button class="layui-btn" data-type="reload"><i class="layui-icon">&#xe615;</i></button>
-        </div>
+    <label class="layui-form-label">选择课程：</label>
+    <div class="layui-input-inline layui-form">
+        <select lay-filter="course">
+            <option value="程序设计基础（VB）-孙健敏">程序设计基础（VB）-孙健敏</option>
+        </select>
     </div>
     <table id="test" lay-filter="test"></table>
 </div>
@@ -74,9 +71,9 @@
             }
             , cols: [
                 [
-                    {type: 'checkbox', fixed: 'left'}
-                    , {field: 'stuNo', title: '学号', fixed: 'left', sort: true}
+                    {field: 'stuNo', title: '学号', fixed: 'left', sort: true}
                     , {field: 'stuName', title: '姓名'}
+                    , {field: 'courseName', title: '课程'}
                     , {field: 'percent', title: '百分比'}
                     , {field: 'totalGrade', title: '成绩'}
                     , {field: 'affect', title: '学习效果'}
